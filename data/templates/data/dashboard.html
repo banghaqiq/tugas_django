@@ -1,0 +1,75 @@
+{% extends "data/main.html" %}
+{% block content %}
+{% include "data/status.html" %}
+<br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-5">
+            <h5>CUSTUMER</h5>
+            <hr>
+            <div class="card card-body">
+                <a href="{% url 'create_custumer' %}" class="btn btn-primary  btn-sm btn-block ">Create Custumer</a>
+                <table class="table table-sm">
+                    <tr>
+                        <th>Action</th>
+                        <th>Custumer</th>
+                        <th>Phone</th>
+                    </tr>
+                    {% for datacustumer in custumer %}
+                    <tr>
+                        <td><a href="{%  url 'custumer' datacustumer.id %}"
+                                class="btn btn-outline-primary btn-sm btn-block ">view</a></td>
+                        <td>
+                            {{ datacustumer.name }}
+                        </td>
+                        <td>
+                            {{ datacustumer.phone}}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
+        <div class="col-md-7">
+            <h5>LAST 5 ORDERS</h5>
+            <hr>
+            <div class="card card-body">
+                <a href="{% url 'create_order' %}" class="btn btn-primary  btn-sm btn-block ">Create order</a>
+                <table class="table table-sm">
+                    <tr>
+                        <th>Product</th>
+                        <th>Date Order</th>
+                        <th>Status</th>
+                        <th>Update</th>
+                        <th>Remove</th>
+                    </tr>
+                    {% for dataorder in order %}
+                    <tr>
+                        <td>
+                            {{ dataorder.product }}
+                        </td>
+                        <td>
+                            {{ dataorder.date_created|date:"l, d N Y" }}
+                            {{ dataorder.date_created|time:"H:i:s" }}
+                        </td>
+                        <td>
+                            {{ dataorder.status }}
+                        </td>
+                        <td><a href="{% url 'update_order' dataorder.id %}" class="btn btn-success">Update</a></td>
+                        <td><a href="{% url 'delete_order' dataorder.id %}" class="btn btn-danger">Delete</a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+<br><br>
+<footer><b><strong>
+            <h6>
+                <center>@copyright</center>
+            </h6>
+        </strong></b></footer>
+{% endblock content %}

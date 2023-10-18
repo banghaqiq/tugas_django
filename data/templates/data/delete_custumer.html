@@ -1,0 +1,20 @@
+{% extends "data/main.html" %}
+{% block content %}
+<br>
+<div class="container-fluid">
+    <div class="row justify-content-md-center">
+        <div class="col-md-8">
+            <div class="card card-body">
+                <p><b>Are you sure want to delete this custumer ?</b></p>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{form}}
+                    <br>
+                    <a href="{% url 'home' %}" class="btn btn-danger" role="button">Cancel</a>
+                    <input type="submit" class="btn btn-primary" name="Confirm">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

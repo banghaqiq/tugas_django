@@ -1,0 +1,77 @@
+{% extends "data/main.html" %}
+{% block content %}
+
+<br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card card-body">
+                <h5>Custumer:</h5>
+                <hr>
+                <a class="btn btn-outline-info btn-sm btn-block" href="{% url 'update_custumer' custumer.id %}">Update
+                    Custumer</a>
+                <a class="btn btn-outline-danger btn-sm btn-block" href="{% url 'delete_custumer' custumer.id %}">Delete
+                    Custumer</a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card card-body">
+                <h5>Contact Information</h5>
+                <hr>
+                <p>Email : {{ custumer.email }}</p>
+                <p>Phone : {{ custumer.phone }}</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card card-body">
+                <h5>Total Orders</h5>
+                <hr>
+                <h1 style="text-align: center;padding: 10px;">{{data_total}}</h1>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class=" row ">
+        <div class="col ">
+            <div class="card card-body ">
+                <form action=" " method="get ">
+                    <button type="submit " class="btn btn-primary">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row ">
+        <div class="col-md ">
+            <div class="card card-body ">
+                <table class="table table-sm ">
+                    <tr>
+                        <th>Name</th>
+                        <th>Product</th>
+                        <th>Category</th>
+                        <th>Date Order</th>
+                        <th>Status</th>
+                        <th>Update</th>
+                        <th>Remove</th>
+                    </tr>
+                    {% for tampil_order_custumer in data_order_custumer %}
+                    <tr>
+                        <td>{{ custumer.name }}</td>
+                        <td>{{ tampil_order_custumer.product }}</td>
+                        <td>{{ tampil_order_custumer.product.category }}</td>
+                        <td>{{ tampil_order_custumer.date_created|date:"l, d N Y " }}</td>
+                        <td>{{ tampil_order_custumer.status }}</td>
+                        <td><a href="{% url 'update_order' tampil_order_custumer.id %} "
+                                class="btn btn-success ">Update</a></td>
+                        <td><a href="{% url 'delete_order' tampil_order_custumer.id %} "
+                                class="btn btn-danger ">Delete</a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
